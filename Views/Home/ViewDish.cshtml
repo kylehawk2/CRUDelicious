@@ -1,0 +1,24 @@
+﻿@using CRUDelicious.Models
+@model Meal
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <h1>@ViewBag.AllDishes[0].Name</h1>
+    <h3>@ViewBag.AllDishes[0].Chef</h3>
+    <p>________________________________</p>
+    <p>@ViewBag.AllDishes[0].Description</p>
+    <h4>Calories: @ViewBag.AllDishes[0].Calories</h4>
+    <h4>Tastiness: @ViewBag.AllDishes[0].Tastiness</h4>
+    <br>
+    <a href="/ViewEdit">Edit</a>
+    <p></p>
+    <a href="/Delete" style="color:red">Delete</a>
+</body>
+</html>

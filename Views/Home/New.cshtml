@@ -1,0 +1,45 @@
+﻿@using CRUDelicious.Models
+@model Meal
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Create a Dish</title>
+</head>
+<body>
+    <h1>Add a new Dish!</h1>
+    <form asp-action="create" asp-controller="Home" method="POST">
+        <div class="form-group">
+            <label asp-for='Name'>Name of Dish:</label>
+            <input type='text' asp-for='Name' class='form-control'>
+            <span asp-validation-for="Name"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for='Chef'>Chef's Name:</label>
+            <input type='text' asp-for='Chef' class='form-control'>
+            <span asp-validation-for="Chef"></span>
+        </div>
+        <div class='form-group'>
+            <label asp-for='Tastiness'>Tastiness</label>
+            <input type='number' asp-for='Tastiness' min='1' max='10' class='form-control'>
+            <span asp-validation-for="Tastiness"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for='Calories'>Calories</label> 
+            <input type='text' asp-for='Calories' class='form-control'>
+            <span asp-validation-for="Calories"></span>
+        </div>
+        <div class='form-group'>
+            <label asp-for='Description'>Description</label>
+            <textarea rows="5" cols="10" class="form-control"></textarea>
+            <span asp-validation-for="Description"></span>
+        </div>
+        <div class='form-group'>
+            <button type='submit'>Add Dish!</button>
+        </div>
+    </form>
+</body>
+</html>

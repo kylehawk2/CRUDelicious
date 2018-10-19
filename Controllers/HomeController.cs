@@ -22,26 +22,56 @@ namespace CRUDelicious.Controllers
         public IActionResult Index()
         {
             List<Meal> AllDishes = dbContext.Dishes.ToList();
+            ViewBag.allDishes = AllDishes;
             return View();
         }
 
-        public IActionResult About()
+        [HttpGet]
+        [Route("New")]
+        public IActionResult New()
         {
-            ViewData["Message"] = "Your application description page.";
 
-            return View();
+            return View("New");
         }
 
-        public IActionResult Contact()
+        [HttpPost]
+        [Route("Create")]
+        public IActionResult Create (Meal dish)
         {
-            ViewData["Message"] = "Your contact page.";
-
-            return View();
+            if(ModelState.IsValid)
+            {
+                Meal newDish = new Meal
+                {
+                    Name = dish.Name,
+                    Chef = dish.Chef,
+                    Tastiness = dish.Tastiness,
+                    Calories = dish.Calories,
+                    Description = dish.Description
+                };
+                dbContext.Add(newDish);
+                dbContext.SaveChanges();
+                return RedirectToAction ("New");
+            }
+            else
+            {
+                return View("Index");
+            }
         }
 
-        public IActionResult Error()
+        [HttpGet]
+        [Route("{id}")]
+        public ViewResult DishId (int id)
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            List <Meal> AllDishes = dbContext.Dishes.Where(dish => dish.DishId == id).ToList();
+            ViewBag.AllDishes = AllDishes;
+            ViewBag.DishId = id;
+            return View("ViewDish");
+        }
+        [HttpGet]
+        [Route("ViewEdit")]
+        public IActionResult ViewEdit()
+        {
+            return View("ViewEdit");
         }
     }
 }
