@@ -76,7 +76,7 @@ namespace CRUDelicious.Controllers
             ViewBag.OneDish = AllDishes;
             return View("EditDish");
         }
-        [HttpGet]
+        [HttpPost]
         [Route("{id}/EditDish")]
         public IActionResult EditDish(int id, Meal editdish)
         {
@@ -97,6 +97,15 @@ namespace CRUDelicious.Controllers
             {
                 return View("EditDish");
             }
+        }
+        [HttpGet]
+        [Route("{id}/Delete")]
+        public IActionResult Delete(int id, Meal deleteddishes)
+        {
+            Meal AllDishes = dbContext.Dishes.SingleOrDefault(dish => dish.DishId == id);
+            dbContext.Dishes.Remove(AllDishes);
+            dbContext.SaveChanges();
+            return RedirectToAction("Index");
         }
     }
 }
