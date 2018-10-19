@@ -10,7 +10,7 @@
     <title>Edit Dish</title>
 </head>
 <body>
-    <form asp-action="edit" asp-controller="Home" method="POST">
+    <form asp-action="EditDish" asp-controller="Home" method="POST">
         <div class="form-group">
             <label asp-for='Name'>Name of Dish:</label>
             <input type='text' asp-for='Name' class='form-control' value="@ViewBag.OneDish.Name">
@@ -33,7 +33,7 @@
         </div>
         <div class='form-group'>
             <label asp-for='Description'>Description</label>
-            <textarea rows="5" cols="10" class="form-control" value="@ViewBag.OneDish.Description"></textarea>
+            <textarea rows="5" cols="10" class="form-control" asp-for="Description" value="@ViewBag.OneDish.Description"></textarea>
             <span asp-validation-for="Description"></span>
         </div>
         <div class='form-group'>

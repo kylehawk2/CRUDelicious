@@ -69,12 +69,34 @@ namespace CRUDelicious.Controllers
             return View("ViewDish");
         }
         [HttpGet]
-        [Route("{id}/EditDish")]
-        public IActionResult EditDish(int id, Meal editdish)
+        [Route("{id}/ShowDish")]
+        public ViewResult ShowDish(int id, Meal editdish)
         {
             Meal AllDishes = dbContext.Dishes.FirstOrDefault(dish => dish.DishId == id); 
             ViewBag.OneDish = AllDishes;
             return View("EditDish");
+        }
+        [HttpGet]
+        [Route("{id}/EditDish")]
+        public IActionResult EditDish(int id, Meal editdish)
+        {
+            Meal AllDishes = dbContext.Dishes.FirstOrDefault(dish => dish.DishId == id);
+            ViewBag.OneDish = AllDishes;
+            if(ModelState.IsValid)
+            {
+                AllDishes.Name = editdish.Name;
+                AllDishes.Chef = editdish.Chef;
+                AllDishes.Tastiness = editdish.Tastiness;
+                AllDishes.Calories = editdish.Calories;
+                AllDishes.Description = editdish.Description;
+
+                dbContext.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                return View("EditDish");
+            }
         }
     }
 }
