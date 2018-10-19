@@ -50,11 +50,12 @@ namespace CRUDelicious.Controllers
                 };
                 dbContext.Add(newDish);
                 dbContext.SaveChanges();
-                return RedirectToAction ("New");
+                return RedirectToAction ("Index");
             }
             else
             {
-                return View("Index");
+                
+                return View("New");
             }
         }
 
@@ -68,10 +69,12 @@ namespace CRUDelicious.Controllers
             return View("ViewDish");
         }
         [HttpGet]
-        [Route("ViewEdit")]
-        public IActionResult ViewEdit()
+        [Route("{id}/EditDish")]
+        public IActionResult EditDish(int id, Meal editdish)
         {
-            return View("ViewEdit");
+            Meal AllDishes = dbContext.Dishes.FirstOrDefault(dish => dish.DishId == id); 
+            ViewBag.OneDish = AllDishes;
+            return View("EditDish");
         }
     }
 }
