@@ -66,6 +66,7 @@ namespace CRUDelicious.Controllers
             List <Meal> AllDishes = dbContext.Dishes.Where(dish => dish.DishId == id).ToList();
             ViewBag.AllDishes = AllDishes;
             ViewBag.DishId = id;
+            Console.WriteLine(ViewBag.AllDishes);
             return View("ViewDish");
         }
         [HttpGet]
